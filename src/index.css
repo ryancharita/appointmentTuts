@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.will-change-filter {
+  will-change: filter;
+}
+.transition-filter {
+  transition: filter 300ms;
+}
