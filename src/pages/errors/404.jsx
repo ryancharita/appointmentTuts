@@ -3,6 +3,7 @@ import { Button, Result } from 'antd';
 const Error404Page = () => {
   return (
     <div className="flex items-center justify-center h-screen">
+      {/* Result component for displaying the 404 error */}
       <Result
         status="404"
         title="404"

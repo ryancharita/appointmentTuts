@@ -6,19 +6,26 @@ import { useParams } from 'react-router-dom';
 import AppoinmentModal from '../../components/appointments/appointmentsForm';
 
 const { Text } = Typography;
+
 const AppointmentDetails = () => {
+  // State variables
   const [modalDisplay, setModalDisplay] = useState(false);
   const [appointment, setAppointment] = useState();
   const { key } = useParams();
+
+  // Fetch and set appointment details from local storage
   useEffect(() => {
     const appointmentList = JSON.parse(localStorage.getItem('items'));
     const index = appointmentList.findIndex((obj) => obj.key === key);
     setAppointment(appointmentList[index]);
   }, [localStorage.getItem('items')]);
 
+  // Handle edit button click to display the modal
   const handleEdit = () => {
     setModalDisplay(true);
   };
+
+  // Handle edit modal close
   const handleEditModalClose = () => {
     setModalDisplay(false);
   };
@@ -41,6 +48,7 @@ const AppointmentDetails = () => {
         {moment(appointment?.appointment_date).format('YYYY-MM-DD')}&nbsp;
         {moment(appointment?.appointment_time).format('hh:mm:ss')}
       </Text>
+      {/* Render the appointment modal */}
       <AppoinmentModal isModalOpen={modalDisplay} handleCancel={handleEditModalClose} record={appointment} />
     </Card>
   );

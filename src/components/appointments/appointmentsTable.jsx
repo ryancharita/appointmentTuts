@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const AppointmentsTable = ({ dataSource, onEdit, confirmLoading, setConfirmLoading }) => {
   const { notification } = App.useApp();
   const navigate = useNavigate();
+
   const columns = [
     {
       title: 'Name',
@@ -46,9 +47,11 @@ const AppointmentsTable = ({ dataSource, onEdit, confirmLoading, setConfirmLoadi
       key: 'actions',
       render: (_, record) => (
         <Space size="middle">
+          {/* Edit button */}
           <Button onClick={handleEdit(record)} type="text">
             <EditTwoTone />
           </Button>
+          {/* Delete button */}
           <Popconfirm
             title="Delete the appointment"
             description="Are you sure to delete this appointment?"
@@ -61,6 +64,7 @@ const AppointmentsTable = ({ dataSource, onEdit, confirmLoading, setConfirmLoadi
               <DeleteTwoTone />
             </Button>
           </Popconfirm>
+          {/* Redirect button */}
           <Button onClick={handleRedirect(record)} type="text">
             <ExpandOutlined />
           </Button>
@@ -68,6 +72,7 @@ const AppointmentsTable = ({ dataSource, onEdit, confirmLoading, setConfirmLoadi
       ),
     },
   ];
+
   const handleOk = (record) => {
     return () => {
       setConfirmLoading(true);
@@ -83,11 +88,13 @@ const AppointmentsTable = ({ dataSource, onEdit, confirmLoading, setConfirmLoadi
       onEdit(record.key);
     };
   };
+
   const handleRedirect = (record) => {
     return () => {
       navigate(`/appointments/${record.key}`);
     };
   };
+
   const handleDelete = (record) => {
     try {
       const appointmentList = JSON.parse(localStorage.getItem('items')) || [];
@@ -101,7 +108,7 @@ const AppointmentsTable = ({ dataSource, onEdit, confirmLoading, setConfirmLoadi
       });
     } catch (error) {
       notification.error({
-        message: `Someting went wrong!`,
+        message: `Something went wrong!`,
         description: error.message,
         placement: 'topRight',
       });

@@ -15,6 +15,7 @@ const AppoinmentModal = ({ isModalOpen, handleCancel, record }) => {
 
   useEffect(() => {
     if (record) {
+      // Pre-populate form fields if a record is provided
       record.appointment_date = moment(record.appointment_date);
       record.appointment_time = moment(record.appointment_time);
       form.setFieldsValue(record);
@@ -41,6 +42,7 @@ const AppoinmentModal = ({ isModalOpen, handleCancel, record }) => {
     try {
       const appointmentList = JSON.parse(localStorage.getItem('items')) || [];
       if (value.key) {
+        // Update existing appointment
         const index = appointmentList.findIndex((obj) => obj.key === value.key);
         appointmentList[index] = value;
         updateLocalStorage(appointmentList);
@@ -50,6 +52,7 @@ const AppoinmentModal = ({ isModalOpen, handleCancel, record }) => {
           placement: 'topRight',
         });
       } else {
+        // Create new appointment
         if (!value.key) {
           value.key = generateRandomString();
         }
@@ -63,7 +66,7 @@ const AppoinmentModal = ({ isModalOpen, handleCancel, record }) => {
       }
     } catch (error) {
       notification.error({
-        message: `Someting went wrong!`,
+        message: `Something went wrong!`,
         description: error.message,
         placement: 'topRight',
       });

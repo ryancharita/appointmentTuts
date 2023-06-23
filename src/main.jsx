@@ -9,13 +9,20 @@ import Router from './routes/router.jsx';
 import 'antd/dist/reset.css';
 import './index.css';
 
-const { defaultAlgorithm, darkAlgorithm } = theme;
+const { darkAlgorithm } = theme;
+
+// Create a browser router
 const router = createBrowserRouter(Router);
+
+// Set the algorithm for the theme
 themeJson['algorithm'] = darkAlgorithm;
 
+// Render the app
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    {/* Configure the Ant Design ConfigProvider with the theme */}
     <ConfigProvider theme={themeJson}>
+      {/* Provide the router to the RouterProvider */}
       <RouterProvider router={router} />
     </ConfigProvider>
   </React.StrictMode>,

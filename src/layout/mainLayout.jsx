@@ -3,19 +3,27 @@ import Paragraph from 'antd/es/typography/Paragraph';
 import { useLocation, useNavigate, useOutlet } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
+
 const MainLayout = () => {
+  // Get the current route's outlet, location, and navigation functions
   const outlet = useOutlet();
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Extract the colorBgContainer from the theme's token
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  // Handle menu item clicks and navigate to the selected key
   const handleMenuClick = ({ key }) => {
     navigate(key);
   };
+
   return (
     <App>
       <Layout className="w-full h-screen">
+        {/* Header */}
         <Header
           style={{
             position: 'sticky',
@@ -27,7 +35,9 @@ const MainLayout = () => {
             background: colorBgContainer,
           }}
         >
+          {/* Menu */}
           <Menu
+            className="w-full"
             mode="horizontal"
             defaultSelectedKeys={location.pathname}
             onClick={handleMenuClick}
@@ -43,11 +53,15 @@ const MainLayout = () => {
             ]}
           />
         </Header>
+
+        {/* Content */}
         <Content>
-          <div className=" m-10" style={{ padding: 24, minHeight: 380, background: colorBgContainer }}>
+          <div className="m-10" style={{ padding: 24, minHeight: 380, background: colorBgContainer }}>
             <Paragraph>{outlet}</Paragraph>
           </div>
         </Content>
+
+        {/* Footer */}
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
       </Layout>
     </App>
