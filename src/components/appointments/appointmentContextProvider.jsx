@@ -1,21 +1,11 @@
-import { useContext, useState } from "react";
+import { action, makeAutoObservable } from 'mobx';
 
-import { Button } from "antd";
-import Title from "antd/es/typography/Title";
-import { action, makeAutoObservable } from "mobx";
-import { observer } from "mobx-react";
-import { useSearchParams } from "react-router-dom";
+import { MyContext } from '../../context/context';
 
-import AppointmentsTable from "../../components/appointments/appointmentsTable";
-import AppoinmentModal from "../../components/appointments/appointmentsForm";
-
-import { MyContext } from "../../context/context";
-
-import { makePossessive } from "../../helpers/names.cjs";
-import { updateLocalStorage } from "../../helpers/localStorage.cjs";
+import { updateLocalStorage } from '../../helpers/localStorage.cjs';
 
 class appointmentStore {
-  appointmentList = JSON.parse(localStorage.getItem("items")) || [];
+  appointmentList = JSON.parse(localStorage.getItem('items')) || [];
   modalDisplay = false;
   editRecord = {};
 
@@ -40,9 +30,7 @@ class appointmentStore {
 }
 
 const AppoinmentContextProvider = ({ children }) => (
-  <MyContext.Provider value={new appointmentStore()}>
-    {children}
-  </MyContext.Provider>
+  <MyContext.Provider value={new appointmentStore()}>{children}</MyContext.Provider>
 );
 
 export default AppoinmentContextProvider;

@@ -10,8 +10,6 @@ import MyTimePicker from "../antd/timePicker";
 
 import { MyContext } from "../../context/context";
 
-import { updateLocalStorage } from "../../helpers/localStorage.cjs";
-
 const AppoinmentModal = observer(({ record }) => {
   const {
     modalDisplay,
